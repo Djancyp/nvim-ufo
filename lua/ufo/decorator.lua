@@ -340,7 +340,9 @@ function Decorator:initialize(namespace)
         end
     })
     event:on('WinClosed', function(winid)
-        self.winSessions[winid] = nil
+        if self.winSessions[winid] then
+            self.winSessions[winid] = nil
+        end
     end, self.disposables)
     event:on('BufDetach', function(bufnr)
         self:resetCurosrFoldedLineHighlightByBuf(bufnr)
