@@ -208,6 +208,9 @@ function Fold:initialize(ns)
     end
     self.initialized = true
     self.disposables = {}
+    if not table then
+        return self
+    end
     table.insert(self.disposables, disposable:create(function()
         self.initialized = false
     end))
