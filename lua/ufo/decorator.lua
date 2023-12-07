@@ -327,6 +327,9 @@ function Decorator:initialize(namespace)
     local virtTextHandler = config.fold_virt_text_handler or self.defaultVirtTextHandler
     self.virtTextHandlers = setmetatable({}, {
         __index = function(tbl, bufnr)
+            if not tbl then
+                return
+            end
             rawset(tbl, bufnr, virtTextHandler)
             return virtTextHandler
         end
@@ -335,6 +338,9 @@ function Decorator:initialize(namespace)
     self.winSessions = setmetatable({}, {
         __index = function(tbl, winid)
             local o = window:new(winid)
+            if not tbl then
+                return
+            end
             rawset(tbl, winid, o)
             return o
         end
