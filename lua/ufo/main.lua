@@ -28,6 +28,9 @@ local function createEvents()
     api.nvim_create_autocmd('WinClosed', {
         group = gid,
         callback = function(ev)
+            if not ev.win then
+                return
+            end
             event:emit(ev.event, tonumber(ev.file))
         end
     })
