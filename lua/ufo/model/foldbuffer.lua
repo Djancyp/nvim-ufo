@@ -51,10 +51,18 @@ function FoldBuffer:buftype()
 end
 
 function FoldBuffer:syntax()
-    if not self.buf then
-        return
+    function FoldBuffer:syntax()
+        if not self.buf then
+            return
+        end
+
+        if type(self.buf) == 'table' and type(self.buf.syntax) == 'function' then
+            return self.buf:syntax()
+        else
+            print('Invalid buf type or missing syntax method')
+            -- Handle the error or return a default value as needed
+        end
     end
-    return self.buf:syntax()
 end
 
 function FoldBuffer:lineCount()
