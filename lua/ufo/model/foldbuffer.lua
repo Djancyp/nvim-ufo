@@ -51,6 +51,9 @@ function FoldBuffer:buftype()
 end
 
 function FoldBuffer:syntax()
+    if not self.buf then
+        return
+    end
     return self.buf:syntax()
 end
 
